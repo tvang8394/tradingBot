@@ -3,7 +3,10 @@ import "./App.css";
 import alpacaApi from "../src/services/alpaca";
 import { Button } from "reactstrap";
 // import polygonApi from '../src/services/polygon';
-import alpacaDataApi from '../src/services/alpaca_data';
+import alphaVin from "../src/services/alphaVin";
+// const store = ConfigureStore();
+import OrderComponent from "./components/orderComponent";
+
 
 class App extends Component {
   constructor(props) {
@@ -13,14 +16,17 @@ class App extends Component {
       buying_power: 0,
       long_market_value: 0,
       portfolio_value: 0,
+      current_price: 0,
+      upper_level: 0,
+      lower_level: 0,
+      prev_close: [],
     };
   }
   componentDidMount() {
-    console.log("fetch data from alpaca");
+    // console.log("fetch data from alpaca");
 
     const api = alpacaApi();
     api.getAccount().then((response) => {
-      // console.log(response);
 
       if (response.ok) {
         this.setState({
@@ -31,16 +37,21 @@ class App extends Component {
         });
       }
     });
+    // const alpacaPacket = alpacaApiPacket();
 
-    const alpacaData = alpacaDataApi();
-    alpacaData.getLastTrade('SPY').then((response) => {
-      console.log(response)
-    })
+    // api.newOrder();
 
-    // const polygon = polygonApi();
-    // polygon.getQuote('SPY').then((response) => {
-    //   console.log(response)
-    // })
+    const alphaVinStream = alphaVin();
+    
+    alphaVinStream.then((response) => {
+      const data = response;
+      const series = data["series"];
+      const keys = Object.keys(series);
+      // console.log(series);
+      this.setState({
+        prev_close: series[keys[0]]["4. close"],
+      });
+    });
   }
   render() {
     return (
@@ -53,7 +64,7 @@ class App extends Component {
           </div>
           <div className="col">
             <h5>Buying Power</h5>
-            <p className="buying">{this.state.buying_power}</p>
+            <p>{this.state.buying_power}</p>
           </div>
           <div className="col">
             <h5>Market Value</h5>
@@ -62,6 +73,15 @@ class App extends Component {
           <div className="col">
             <h5>Profile Value</h5>
             <p>{this.state.portfolio_value}</p>
+          </div>
+          <div className="col">
+            <h5>Previous Price close</h5>
+            <p>{this.state.prev_close}</p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <OrderComponent />
           </div>
         </div>
       </div>
