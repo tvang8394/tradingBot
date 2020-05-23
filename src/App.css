@@ -1,3 +1,12 @@
 .header {
     background-color: #4285F4;
 }
+.card-up-head {
+    color: #EA4335;
+    font-weight: 700;
+}
+
+.card-low-head {
+    color: #4285F4;
+    font-weight: 700;
+}

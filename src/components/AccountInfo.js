@@ -24,7 +24,7 @@ export default class AccountInfo extends Component {
       }
     });
     api.getPostion().then((response) => {
-      console.log(response.data[0]);
+    //   console.log(response.data[0]);
 
       this.setState({
         portfolio: response.data.map((stock) => (

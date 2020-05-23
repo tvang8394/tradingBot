@@ -1,7 +1,16 @@
 import React, { Component } from "react";
 import alphaVin from "../services/alphaVin";
-import { Input, Form, Label, Col, FormGroup } from "reactstrap";
-import { NONE } from "apisauce";
+import {
+  Input,
+  Form,
+  Label,
+  Col,
+  FormGroup,
+  Card,
+  Button,
+  CardHeader,
+  CardBody,
+} from "reactstrap";
 
 export default class Stock extends Component {
   constructor(props) {
@@ -11,9 +20,10 @@ export default class Stock extends Component {
       prev_open: 0,
       upperLevel: 0,
       lowerLevel: 0,
+      standardRisk: 0,
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     // const alphaVinStream = alphaVin();
     // alphaVinStream.then((response) => {
     //   const data = response;
@@ -27,11 +37,11 @@ export default class Stock extends Component {
     // });
   }
   handleChange = (e) => {
-      const name = e.target.name;
-      this.setState({
-          [name]: e.target.value
-      })
-  } 
+    const name = e.target.name;
+    this.setState({
+      [name]: e.target.value,
+    });
+  };
   render() {
     return (
       <React.Fragment>
@@ -65,12 +75,27 @@ export default class Stock extends Component {
                   />
                 </Col>
               </FormGroup>
+              <FormGroup>
+                <Label htmlFor="standardRisk" md={6} className="ml-1">
+                  Standard Risk
+                </Label>
+                <Col md={12}>
+                  <Input
+                    type="text"
+                    id="standardRisk"
+                    name="standardRisk"
+                    placeholder="Standard Risk"
+                    value={this.state.standardRisk}
+                    onChange={this.handleChange}
+                  />
+                </Col>
+              </FormGroup>
             </Form>
           </div>
           <div className="col">
-          <Form>
-          <FormGroup>
-                <Label htmlFor="lowerLevel" md={6} className="ml-1"> 
+            <Form>
+              <FormGroup>
+                <Label htmlFor="lowerLevel" md={6} className="ml-1">
                   Lower Level
                 </Label>
                 <Col md={12}>
@@ -84,7 +109,41 @@ export default class Stock extends Component {
                   />
                 </Col>
               </FormGroup>
-              </Form>
+              <FormGroup>
+                <Label htmlFor="hardStop" md={6} className="ml-1">
+                  Hard Stop / Buy
+                </Label>
+                <Col md={5}>
+                  <Input type="select" id="hardStop" name="hardStop">
+                    <option>Yes</option>
+                    <option>No</option>
+                  </Input>
+                </Col>
+              </FormGroup>
+            </Form>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <Card className="card-up"> 
+              <CardHeader className="text-center card-up-head">UPPER LEVEL HIT</CardHeader>
+              <CardBody className="text-center">
+                Would you like to buy?
+                
+              </CardBody>
+              <Button color="danger" className="col-sm-5 col-md-3 mx-auto mb-2">Yes</Button>
+              <Button color="info" className="col-sm-5 col-md-3 mx-auto mb-2">No</Button>
+            </Card>
+          </div>
+          <div className="col">
+            <Card>
+              <CardHeader className="text-center card-low-head">LOWER LEVEL HIT</CardHeader>
+              <CardBody className="text-center">
+                Would you like to buy?
+              </CardBody>
+              <Button color="danger" className="col-sm-5 col-md-3 mx-auto mb-2">Yes</Button>
+              <Button color="info" className="col-sm-5 col-md-3 mx-auto mb-2">No</Button>
+            </Card>
           </div>
         </div>
       </React.Fragment>
