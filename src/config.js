@@ -1,6 +1,6 @@
 const config = {
-  ALPACA_API_KEY: "PKV14VHWDTCN13KQCIQX",
-  ALPACA_SECRET_KEY: "L5IZhfBX4r/04b7SH3pZMZnPnwjPzeUP9TsoJwx6",
+  ALPACA_API_KEY: "PK2G9SOQ4Q2V0NLQDUGF",
+  ALPACA_SECRET_KEY: "NwIDP28Z8bvF9VaW0tVtipsrfMYBLMlvhfd900te",
   ALPACA_URL: "https://paper-api.alpaca.markets",
   ALPACA_DATA_URL: "https://data.alpaca.markets/v1",
   POLYGON_URL: "https://api.polygon.io/",

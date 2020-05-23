@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import config from "../config";
-import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
+import { Button, Form, FormGroup, Input, Col } from "reactstrap";
 const Alpaca = require("@alpacahq/alpaca-trade-api");
 
 class OrderComponent extends Component {
@@ -20,22 +20,16 @@ class OrderComponent extends Component {
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    // console.log("change symbol" + this.state.symbol);
-    // console.log("value" + value);
     const name = target.name;
     this.setState({ [name]: value });
-    // console.log("change symbol" + this.state.symbol);
-
     event.preventDefault();
   };
 
+
   handleSubmit = (event) => {
-    // console.log(this.state.alpacaApiPacket)
     const api = this.state.alpacaApiPacket;
-    const symbol = this.state.symbol;
+    const symbol = this.state.symbol.toUpperCase();
     const qty = parseInt(this.state.qty, 10);
-    console.log("symbol" + typeof symbol);
-    console.log("symbol" + typeof qty + qty);
 
     api.createOrder({
       symbol: symbol, // any valid ticker symbol
@@ -44,8 +38,6 @@ class OrderComponent extends Component {
       type: "market",
       time_in_force: "gtc",
     });
-
-    event.preventDefault();
   };
   render() {
     return (
