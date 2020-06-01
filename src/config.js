@@ -1,12 +1,11 @@
 const config = {
-  ALPACA_API_KEY: "PK2G9SOQ4Q2V0NLQDUGF",
-  ALPACA_SECRET_KEY: "NwIDP28Z8bvF9VaW0tVtipsrfMYBLMlvhfd900te",
-  ALPACA_URL: "https://paper-api.alpaca.markets",
-  ALPACA_DATA_URL: "https://data.alpaca.markets/v1",
+  ALPACA_API_KEY: "PKACVZL1CL2I48TSJW7V",
+  ALPACA_SECRET_KEY: "rdrl0oviy296VrIomNoRwqrWL1HPMD9G9ndejCoo",
+  ALPACA_ACCOUNT_URL: "https://paper-api.alpaca.markets/v2/account",
   POLYGON_URL: "https://api.polygon.io/",
   STREAM_URL: "wss://data.alpaca.markets/stream",
-  ALPHA_VIN_URL: "https://www.alphavantage.co/query?",
-  ALPHA_VIN_KEY: "Z94LG5RAXC8V0R2R"
+  ALPHA_VANTAGE_URL: "https://www.alphavantage.co/query?",
+  ALPHA_VANTAGE_KEY: "Z94LG5RAXC8V0R2R"
   
 };
 
