@@ -19,3 +19,24 @@ export function loadAccount() {
         });
     }
 }
+
+export function loadPositionSuccess(positions) {
+    // console.log(positions)
+
+    return {
+        type: types.LOAD_POSITIONS_SUCCESS,
+        payload: positions,
+    };
+}
+
+export function loadPositions() {
+    return async function (dispatch) {
+        return alpacaApi.getPositions()
+        .then(positions => {
+            dispatch(loadPositionSuccess(positions));
+        })
+        .catch(e => {
+            throw e;
+        });
+    }
+}

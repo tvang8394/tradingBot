@@ -1,8 +1,8 @@
 import config from "../config";
+import { handleError, handleResponse } from "./apiUtils";
 
 export async function getMarketData() {
   const url = new URL(config.ALPHA_VANTAGE_URL);
-  const marketData = [];
   let params = {
     function: "TIME_SERIES_INTRADAY",
     symbol: "SPY",
@@ -13,13 +13,13 @@ export async function getMarketData() {
     url.searchParams.append(key, params[key])
   );
 
-  const response = await fetch(url);
-  const data = await response.json();
-  // console.log(data)
-  const series = await data["Time Series (1min)"];
-  
-  return {
-    series,
-  };
-  // console.log(series)
+  return await fetch(url)
+    .then(handleResponse)
+    .then((data) => data["Time Series (1min)"])
+    .then(time => {
+      let keys = Object.keys(time)
+      let currentTime = keys[0]
+      return time[currentTime]
+    })
+    .catch(handleError);
 }

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import AccountInfo from "./AccountInfo";
 import MarketData from "./MarketData";
-
+import Levels from "./Levels";
+import OrderComponent from "./OrderComponent";
 class MainBody extends Component {
   render() {
     return (
@@ -9,10 +10,14 @@ class MainBody extends Component {
         <div className="col-3 border">
           <AccountInfo />
         </div>
-        <div className="col-6 border">
+        <div className="col border">
           <MarketData />
+          <Levels />
         </div>
-        <div className="col-3 border">col-3</div>
+        <div className="col-3 border">
+          Alerts When Levels are Reached
+          <OrderComponent />
+        </div>
       </div>
     );
   }
